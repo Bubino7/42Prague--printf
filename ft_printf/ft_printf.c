@@ -6,7 +6,7 @@
 /*   By: jbubak <jbubak@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 16:59:48 by jbubak            #+#    #+#             */
-/*   Updated: 2025/07/17 19:22:50 by jbubak           ###   ########.fr       */
+/*   Updated: 2025/07/22 09:32:29 by jbubak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,43 @@ int	ft_handle_specifier(char specifier, va_list args)
 	return (0);
 }
 
-int	ft_printf(const char *format, ...)
+int	ft_printf_loop(const char *format, va_list args)
 {
-	va_list	args;
-	int		str_len;
-	int		i;
+	int	str_len;
+	int	i;
+	int	res;
 
 	i = 0;
 	str_len = 0;
-	va_start(args, format);
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
 			i++;
-			str_len += ft_handle_specifier(format[i], args);
+			res = ft_handle_specifier(format[i], args);
+			if (res == -1)
+				return (-1);
+			str_len += res;
 		}
 		else
 		{
-			ft_putchar_fd(format[i], 1);
-			str_len++;
+			res = ft_putchar_safe(format[i]);
+			if (res == -1)
+				return (-1);
+			str_len += res;
 		}
 		i++;
 	}
-	va_end(args);
 	return (str_len);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	va_list	args;
+	int		res;
+
+	va_start(args, format);
+	res = ft_printf_loop(format, args);
+	va_end(args);
+	return (res);
 }

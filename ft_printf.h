@@ -6,7 +6,7 @@
 /*   By: jbubak <jbubak@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 16:58:01 by jbubak            #+#    #+#             */
-/*   Updated: 2025/07/17 19:22:50 by jbubak           ###   ########.fr       */
+/*   Updated: 2025/07/21 21:10:14 by jbubak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ int	ft_putnbr_base(unsigned long n, char *base, int base_len);
 int	ft_nbrlen_base(unsigned long n, int base_len);
 int	ft_putnbr_unsigned(unsigned int n);
 int	ft_nbrlen_unsigned(unsigned int n);
+int	ft_putchar_safe(char c);
+int	ft_putstr_safe(char *s);
+int	ft_putnbr_safe(int n);
 int	ft_handle_c(va_list args);
 int	ft_handle_s(va_list args);
 int	ft_handle_d(va_list args);

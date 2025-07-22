@@ -6,11 +6,11 @@
 /*   By: jbubak <jbubak@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 18:14:49 by jbubak            #+#    #+#             */
-/*   Updated: 2025/07/17 19:22:50 by jbubak           ###   ########.fr       */
+/*   Updated: 2025/07/21 21:21:13 by jbubak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "ft_printf.h"
 
 int	ft_nbrlen(int n)
 {
@@ -32,11 +32,19 @@ int	ft_nbrlen(int n)
 int	ft_putnbr_base(unsigned long n, char *base, int base_len)
 {
 	int	count;
+	int	res;
 
 	count = 0;
 	if (n >= (unsigned long)base_len)
-		count += ft_putnbr_base(n / base_len, base, base_len);
-	write(1, &base[n % base_len], 1);
+	{
+		res = ft_putnbr_base(n / base_len, base, base_len);
+		if (res == -1)
+			return (-1);
+		count += res;
+	}
+	res = write(1, &base[n % base_len], 1);
+	if (res == -1)
+		return (-1);
 	return (count + 1);
 }
 
@@ -58,11 +66,19 @@ int	ft_nbrlen_base(unsigned long n, int base_len)
 int	ft_putnbr_unsigned(unsigned int n)
 {
 	int	count;
+	int	res;
 
 	count = 0;
 	if (n >= 10)
-		count += ft_putnbr_unsigned(n / 10);
-	write(1, &"0123456789"[n % 10], 1);
+	{
+		res = ft_putnbr_unsigned(n / 10);
+		if (res == -1)
+			return (-1);
+		count += res;
+	}
+	res = write(1, &"0123456789"[n % 10], 1);
+	if (res == -1)
+		return (-1);
 	return (count + 1);
 }
 
