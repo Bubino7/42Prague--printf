@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_handlers_2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jbubak <jbubak@student.42prague.com>       +#+  +:+       +#+        */
+/*   By: jbubak <jbubak@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 18:57:49 by jbubak            #+#    #+#             */
-/*   Updated: 2025/07/21 21:21:35 by jbubak           ###   ########.fr       */
+/*   Updated: 2025/08/06 19:12:32 by jbubak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,16 @@ int	ft_handle_pointer(va_list args)
 	int				res;
 
 	p = va_arg(args, unsigned long);
+	if (p == 0)
+	{
+		res = ft_putstr_safe("(nil)");
+		if (res == -1)
+			return (-1);
+		return (5);
+	}
 	res = ft_putstr_safe("0x");
 	if (res == -1)
 		return (-1);
-	if (p == 0)
-	{
-		res = ft_putchar_safe('0');
-		if (res == -1)
-			return (-1);
-		return (3);
-	}
 	res = ft_putnbr_base(p, "0123456789abcdef", 16);
 	if (res == -1)
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: jbubak <jbubak@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 16:59:48 by jbubak            #+#    #+#             */
-/*   Updated: 2025/07/22 09:32:29 by jbubak           ###   ########.fr       */
+/*   Updated: 2025/08/06 19:23:36 by jbubak           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,12 @@ int	ft_printf_loop(const char *format, va_list args)
 		{
 			i++;
 			res = ft_handle_specifier(format[i], args);
-			if (res == -1)
-				return (-1);
-			str_len += res;
 		}
 		else
-		{
 			res = ft_putchar_safe(format[i]);
-			if (res == -1)
-				return (-1);
-			str_len += res;
-		}
+		if (res == -1)
+			return (-1);
+		str_len += res;
 		i++;
 	}
 	return (str_len);
